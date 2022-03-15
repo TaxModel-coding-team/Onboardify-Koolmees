@@ -4,18 +4,19 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using back_end.ViewModels;
 
 namespace back_end.Models
 {
     public class Quest
     {
         //Properties
-        [Key]
-        [Required]
-        public Guid ID { get; set; }
+        [Key] [Required] public Guid ID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public virtual ICollection<SubQuest> SubQuests { get; set; }
+        
+        public List<RoleViewModel> Role { get; set; }
 
         public Quest(Guid iD, string title, string description)
         {
@@ -26,7 +27,6 @@ namespace back_end.Models
 
         public Quest()
         {
-
         }
     }
 }
