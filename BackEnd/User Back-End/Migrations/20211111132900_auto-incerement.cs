@@ -8,7 +8,7 @@ namespace User_Back_End.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<Guid>(
-                name: "ID",
+                name: "Id",
                 table: "User",
                 type: "uniqueidentifier",
                 nullable: false,
@@ -20,7 +20,7 @@ namespace User_Back_End.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<Guid>(
-                name: "ID",
+                name: "Id",
                 table: "User",
                 type: "uniqueidentifier",
                 nullable: false,

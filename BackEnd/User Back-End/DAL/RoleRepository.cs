@@ -16,7 +16,7 @@ namespace User_Back_End.DAL
 
         public Role GetRole(Role role)
         {
-            return _context.Role.SingleOrDefault(q => q.ID == role.ID);
+            return _context.Role.SingleOrDefault(q => q.Id == role.Id);
         }
 
         public Role NewRole(Role role)

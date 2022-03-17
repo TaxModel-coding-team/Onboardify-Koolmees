@@ -21,7 +21,7 @@ namespace User_Back_End.DAL
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<User>().Property(User => User.ID).HasDefaultValueSql("NEWID()");
-            modelBuilder.Entity<Role>().Property(Role => Role.ID).HasDefaultValueSql("NEWID()");
+            modelBuilder.Entity<Role>().Property(Role => Role.Id).HasDefaultValueSql("NEWID()");
         }
     }
 }

@@ -69,5 +69,13 @@ namespace User_Back_End.Controllers
             return response.Headers.Location;
         }
 
+        [HttpGet]
+        [Route("byRole/{Id}")]
+        public IActionResult GetUsersByRole(Guid id)
+        {
+            var users = _userLogic.GetUsersByRole(id);
+            return Ok(users);
+        }
+
     }
 }
