@@ -61,24 +61,6 @@ namespace back_end.Controllers
             return Ok(quests);
         }
 
-        // [HttpGet]
-        // [Route("byRoles")]
-        // public IActionResult GetQuestsByRoles(string ids)
-        // {
-        //     var separated = ids.Split(new char[] { ',' });
-        //     List<Guid> parsed = separated.Select(Guid.Parse).ToList();
-        //     List<RoleViewModel> roleViewModels = new List<RoleViewModel>();
-        //     foreach (Guid guid in parsed)
-        //     {
-        //         RoleViewModel model = new RoleViewModel();
-        //         model.Id = guid;
-        //         roleViewModels.Add(model);
-        //     }
-        //
-        //     var response = _questlogic.GetQuestsByRole(roleViewModels);
-        //     return Ok(response);
-        // }
-
         private void AssignQuestForUser(UserViewModel userViewModel, List<QuestCompletionViewModel> questCompletionViewModels, QuestViewModel quest)
         {
             foreach (SubQuestViewModel subQuestViewModel in quest.SubQuests)
