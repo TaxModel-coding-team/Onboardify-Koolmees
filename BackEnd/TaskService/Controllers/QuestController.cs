@@ -9,7 +9,6 @@ using back_end.DAL;
 using back_end.Logic;
 using AutoMapper;
 
-
 namespace back_end.Controllers
 {
     [Route("quests")]
@@ -51,6 +50,14 @@ namespace back_end.Controllers
                 AssignQuestForUser(userViewModel, questCompletionViewModels, quest);
             }
             _questlogic.NewUserQuests(questCompletionViewModels);
+            return Ok(quests);
+        }
+
+        [HttpGet]
+        [Route("role/{ID}")]
+        public IActionResult GetQuestsByRole(Guid ID)
+        {
+            var quests = _questlogic.GetQuestsByRole(ID);
             return Ok(quests);
         }
 
