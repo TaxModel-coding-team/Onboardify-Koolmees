@@ -6,8 +6,6 @@ using back_end.Models;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using back_end.Logic;
-using back_end.ViewModels;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace back_end.DAL
 {
@@ -28,13 +26,6 @@ namespace back_end.DAL
             return quests;
         }
 
-        public ICollection<Quest> GetQuestsByRole(Guid guid)
-        {
-            List<Quest> quests = new List<Quest>();
-            quests.Add(_context.Quest.FirstOrDefault(q => q.Role.Any(r => r.Id == guid)));
-            return quests;
-        }
-
         public void NewUserQuests(List<QuestUserManagement> questUserManagement)
         {
             _context.QuestUserManagement.AddRange(questUserManagement);
@@ -45,8 +36,7 @@ namespace back_end.DAL
         {
             List<QuestUserManagement> questUserManagement = new List<QuestUserManagement>();
 
-            questUserManagement = _context.QuestUserManagement.Where(u => u.UserID == guid).Include(q => q.SubQuests)
-                .ToList();
+            questUserManagement = _context.QuestUserManagement.Where(u => u.UserID == guid).Include(q => q.SubQuests).ToList();
 
             return questUserManagement;
         }
@@ -65,10 +55,9 @@ namespace back_end.DAL
 
         public bool CompleteQuest(QuestUserManagement questToComplete)
         {
-            QuestUserManagement result = _context.QuestUserManagement.SingleOrDefault(questUser =>
-                questUser.UserID == questToComplete.UserID && questUser.SubQuestID == questToComplete.SubQuestID);
-
-            if (result != null)
+            QuestUserManagement result = _context.QuestUserManagement.SingleOrDefault(questUser => questUser.UserID == questToComplete.UserID && questUser.SubQuestID == questToComplete.SubQuestID);
+            
+            if(result != null)
             {
                 result.Completed = true;
                 _context.SaveChanges();
