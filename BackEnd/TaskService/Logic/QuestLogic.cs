@@ -6,6 +6,7 @@ using AutoMapper;
 using back_end.DAL;
 using back_end.Models;
 using back_end.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace back_end.Logic
 {
@@ -46,6 +47,13 @@ namespace back_end.Logic
             List<Quest> quests = _repository.GetQuestBySubQuest(questsUsers.Select(q => q.SubQuests).ToList()).ToList();
             List<QuestViewModel> questViewModels = _mapper.Map<List<QuestViewModel>>(quests);
 
+            return questViewModels;
+        }
+
+        public List<QuestViewModel> GetQuestsByRole(Guid guid)
+        {
+            List<Quest> quests = _repository.GetQuestsByRole(guid).ToList();
+            List<QuestViewModel> questViewModels = _mapper.Map<List<QuestViewModel>>(quests);
             return questViewModels;
         }
 
