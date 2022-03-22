@@ -25,5 +25,12 @@ namespace User_Back_End.DAL
             _context.SaveChanges();
             return user;
         }
+
+        public ICollection<User> GetByRole(Guid id)
+        {
+            List<User> users = new List<User>();
+            users.Add(_context.User.FirstOrDefault(u => u.Roles.Any(r => r.Id == id)));
+            return users;
+        }
     }
 }

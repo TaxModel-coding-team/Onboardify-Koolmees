@@ -11,5 +11,7 @@ namespace User_Back_End.DAL
         User GetUser(User user);
         User NewUser(User user);
 
+        ICollection<User> GetByRole(Guid id);
+
     }
 }

@@ -45,5 +45,12 @@ namespace User_Back_End.Logic
         {       
             return QRCodeWriter.CreateQrCode(userViewModel.ID.ToString(), 500, QRCodeWriter.QrErrorCorrectionLevel.Medium).ToImage();
         }
+
+        public List<UserViewModel> GetUsersByRole(Guid id)
+        {
+            List<User> users = _repository.GetByRole(id).ToList();
+            List<UserViewModel> userViewModels = _mapper.Map<List<UserViewModel>>(users);
+            return userViewModels;
+        }
     }
 }

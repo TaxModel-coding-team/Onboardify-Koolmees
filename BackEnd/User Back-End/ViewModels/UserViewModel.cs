@@ -14,6 +14,6 @@ namespace User_Back_End.ViewModels
         public string Username { get; set; }
         public int ExperiencePoints { get; set; }
         public Image qrCode { get; set; }
-        public List<Role> Roles { get; set; }
+        public List<RoleViewModel> Roles { get; set; }
     }
 }

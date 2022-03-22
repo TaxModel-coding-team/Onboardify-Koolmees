@@ -10,7 +10,7 @@ namespace User_Back_End.Models
     {
         [Key]
         [Required]
-        public Guid ID { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
     }
 }
