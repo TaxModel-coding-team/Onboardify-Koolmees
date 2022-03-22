@@ -44,5 +44,10 @@ namespace TestProject.Stub
             }
             return null;
         }
+
+        public ICollection<User> GetByRole(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

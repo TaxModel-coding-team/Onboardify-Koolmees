@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ namespace User_Back_End.Models
         [Key] [Required] public Guid ID { get; set; }
         public string Email { get; set; }
         public string Username { get; set; }
+        [NotMapped]
         public List<Role> Roles { get; set; }
 
         public User()
@@ -23,6 +25,13 @@ namespace User_Back_End.Models
             Email = email;
             Username = username;
             Roles = roles;
+        }
+
+        public User(Guid id, string email, string username)
+        {
+            ID = id;
+            Email = email;
+            Username = username;
         }
 
         public User(string email)
