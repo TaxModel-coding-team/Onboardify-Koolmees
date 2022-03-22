@@ -14,14 +14,13 @@ namespace User_Back_End.DAL
 
         }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<Role> Role { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<User>().Property(User => User.ID).HasDefaultValueSql("NEWID()");
-            modelBuilder.Entity<Role>().Property(Role => Role.ID).HasDefaultValueSql("NEWID()");
         }
     }
 }
