@@ -6,6 +6,6 @@ export interface Quest {
     title: string;
     description: string;
     exp: number;
+    questRole: String;
     subQuests: Subquest[];
-    
   }
