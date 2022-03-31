@@ -11,5 +11,6 @@ namespace User_Back_End.DAL
         Role GetRole(Role role);
 
         Role NewRole(Role role);
+        List<Role> GetAllRoles();
     }
 }

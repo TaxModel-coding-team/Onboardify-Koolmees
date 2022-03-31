@@ -59,7 +59,6 @@ namespace back_end.DAL
             {
                 quests.Add(_context.Quest.Where(q => q.SubQuests.Any(sq => sq.ID == subQuest.ID)).FirstOrDefault());
             }
-
             return quests.Distinct().ToList();
         }
 
