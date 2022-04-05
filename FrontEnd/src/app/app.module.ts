@@ -18,12 +18,17 @@ import { AchievementsComponent } from './achievements/achievements.component';
 import { ProfileDetailsComponent } from './profile-details/profile-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
+import { QRCode } from 'qrcode';
+import { ScanFolioCitaComponent } from './scan-folio-cita/scan-folio-cita.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+
 
 export function MSALInstanceFactory(): IPublicClientApplication{
   return new PublicClientApplication({
     auth: {
       clientId: '455b6cce-e291-46f6-a7d8-1dfecbe011da',
       redirectUri: 'http://localhost:4200'
+
     }
   })
 }
@@ -41,6 +46,7 @@ export function MSALInstanceFactory(): IPublicClientApplication{
     AchievementsComponent,
     ProfileDetailsComponent,
     
+    
   ],
   imports: [
     BrowserModule,
@@ -51,7 +57,9 @@ export function MSALInstanceFactory(): IPublicClientApplication{
     FormsModule,
     GlassModule,
     NgbModule,
-    RouterModule
+    RouterModule,
+    ZXingScannerModule
+    
   ],
   providers: [
     {
