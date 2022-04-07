@@ -18,8 +18,8 @@ import {AchievementsComponent} from './achievements/achievements.component';
 import {ProfileDetailsComponent} from './profile-details/profile-details.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
-import {QRCode} from 'qrcode';
 import {ZXingScannerModule} from '@zxing/ngx-scanner';
+import {QRCodeModule} from "angularx-qrcode";
 
 
 export function MSALInstanceFactory(): IPublicClientApplication {
@@ -53,7 +53,8 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     GlassModule,
     NgbModule,
     RouterModule,
-    ZXingScannerModule
+    ZXingScannerModule,
+    QRCodeModule,
   ],
   providers: [
     {
