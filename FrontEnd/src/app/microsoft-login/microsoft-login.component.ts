@@ -72,7 +72,7 @@ export class MicrosoftLoginComponent implements OnInit {
     this.userService.verifyIfUserExists(this.newUser)
       .subscribe((user) => {
           console.log(user);
-          user.userRoles.forEach(role => {
+          user.roles.forEach(role => {
             this.roleService.getQuestByRole(role.id).subscribe(res => this.newUser.userQuestsByRole = res);
             this.newUser.userQuestsByRole.forEach(quest => {
               this.newUser.userQuestsByRole.push(quest);

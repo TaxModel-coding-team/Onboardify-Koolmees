@@ -8,6 +8,6 @@ export interface User {
   username: string;
   experiencepoints: number;
   qrcode: any;
-  userRoles: Role[];
+  roles: Role[];
   userQuestsByRole: Quest[];
 }
