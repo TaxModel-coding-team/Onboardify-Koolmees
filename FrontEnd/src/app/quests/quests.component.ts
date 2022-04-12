@@ -9,7 +9,7 @@ import {BarcodeFormat} from "@zxing/browser";
 import {ZXingScannerComponent} from "@zxing/ngx-scanner";
 import {AlertComponent} from "../alert/alert.component";
 import { RoleServices } from '../Services/role.service';
-
+import {User} from "../Models/user";
 
 @Component({
   selector: 'app-quests',
@@ -17,7 +17,6 @@ import { RoleServices } from '../Services/role.service';
   styleUrls: ['./quests.component.css']
 })
 export class QuestsComponent implements OnInit, OnDestroy {
-
   //Fields
   public quests: Quest[] = [];
   private user : User = JSON.parse(this.cookies.get("user"))
@@ -31,9 +30,6 @@ export class QuestsComponent implements OnInit, OnDestroy {
   @ViewChild(AlertComponent, {static: false})
   private alert: AlertComponent | undefined;
 
-
-
-
   constructor(private questService: QuestService, private roleservice: RoleServices,
     private cookies: CookieService) { }
 
@@ -46,8 +42,8 @@ export class QuestsComponent implements OnInit, OnDestroy {
   //Getting all quests from API and caching to observable
   public getQuests(): void {
       this.subscription.add(this.questService.getQuests()
-      .subscribe(quest => this.quests = quest)) 
-      this. quests = this.user.userQuestsByRole;    
+      .subscribe(quest => this.quests = quest))
+      this. quests = this.user.userQuestsByRole;
   }
 
   //Simple greeting based on your time of day
