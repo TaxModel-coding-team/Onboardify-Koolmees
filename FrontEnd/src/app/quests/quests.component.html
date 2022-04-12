@@ -3,7 +3,7 @@
 <h2 class="center text-white" style="margin-bottom: 2%;">Quests</h2>
 
 <div class="accordion list-group" id="accordionExample">
-  <div *ngFor="let quest of quests" class="accordion-item" style="background-color: transparent;">
+  <div *ngFor="let quest of quests" class="accordion-item" style="background-color: transparent; border: 0;">
     <div class="accordion-header" attr.id="heading{{quest.title}}" asGlass [borderRadius]=9>
       <button
         class="accordion-button collapsed text-white"
@@ -37,6 +37,7 @@
   </div>
 </div><br/>
 <zxing-scanner [formats]="allowedFormats" *ngIf="showModal" (scanSuccess)="handleScanResult($event)"></zxing-scanner>
+<app-alert></app-alert>
 
 <!-- <div class="list-group" style="border: none; padding-bottom: 50px;">
   <progress-bar progress="{{gainedExp}}"></progress-bar>

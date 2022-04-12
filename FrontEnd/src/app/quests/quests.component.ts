@@ -6,6 +6,7 @@ import {Quest} from '../Models/quest';
 import {QuestService} from '../Services/quest.service';
 import {BarcodeFormat} from "@zxing/browser";
 import {ZXingScannerComponent} from "@zxing/ngx-scanner";
+import {AlertComponent} from "../alert/alert.component";
 
 @Component({
   selector: 'app-quests',
@@ -23,6 +24,8 @@ export class QuestsComponent implements OnInit, OnDestroy {
   private scanner: ZXingScannerComponent | undefined;
   public showModal: boolean = false;
   public btnVariable: any;
+  @ViewChild(AlertComponent, {static: false})
+  private alert: AlertComponent | undefined;
 
   constructor(private questService: QuestService,
               private cookies: CookieService) {
@@ -67,20 +70,25 @@ export class QuestsComponent implements OnInit, OnDestroy {
       this.questService.completeQuest(userId.toString(), subquestId.toString()).subscribe(response => {
         console.log(response);
         if (response) {
+          this.alert?.showAlert("success", "Deze quest heb je helemaal super afgerond! Goed gedaan!");
           this.showScanner();
         }
+        let subQuest: any;
+        this.quests.forEach(quest => {
+          console.log(quest)
+          subQuest = quest.subQuests.find(subQuest => subQuest.id = subquestId)
+          if (subQuest) {
+            subQuest.completed = true;
+            return;
+          }
+        })
       })
     } else{
       console.log("Niet de goede Quest!");
+      this.alert?.showAlert("danger", "Deze QR-code past niet bij de quest!");
       this.showScanner();
     }
-    let subQuest: any;
-    this.quests.forEach(quest => {
-      if (subQuest == quest.subQuests.find(subQuest => subQuest.id == subquestId)) {
-        subQuest.completed = true;
-        return;
-      }
-    })
+
   }
 
   public handleScanResult(resultString: any): void {

@@ -20,6 +20,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
 import {ZXingScannerModule} from '@zxing/ngx-scanner';
 import {QRCodeModule} from "angularx-qrcode";
+import { AlertComponent } from './alert/alert.component';
 
 
 export function MSALInstanceFactory(): IPublicClientApplication {
@@ -42,6 +43,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     BadgesComponent,
     AchievementsComponent,
     ProfileDetailsComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,5 +67,4 @@ export function MSALInstanceFactory(): IPublicClientApplication {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}
