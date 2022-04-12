@@ -3,7 +3,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
 import { textChangeRangeIsUnchanged } from 'typescript';
 import { Quest } from '../Models/quest';
+import { User } from '../Models/user';
 import { QuestService } from '../Services/quest.service';
+import { RoleServices } from '../Services/role.service';
 
 @Component({
   selector: 'app-quests',
@@ -14,10 +16,11 @@ export class QuestsComponent implements OnInit, OnDestroy {
 
   //Fields
   public quests: Quest[] = [];
+  private user : User = JSON.parse(this.cookies.get("user"))
   public greeting: String = '';
   private subscription: Subscription = new Subscription();
 
-  constructor(private questService: QuestService,
+  constructor(private questService: QuestService, private roleservice: RoleServices,
     private cookies: CookieService) { }
 
   ngOnInit(): void {
@@ -29,7 +32,8 @@ export class QuestsComponent implements OnInit, OnDestroy {
   //Getting all quests from API and caching to observable
   public getQuests(): void {
       this.subscription.add(this.questService.getQuests()
-      .subscribe(quest => this.quests = quest))     
+      .subscribe(quest => this.quests = quest)) 
+      this. quests = this.user.userQuestsByRole;    
   }
 
   //Simple greeting based on your time of day
