@@ -1,7 +1,31 @@
 <app-header></app-header>
 <app-profile-details></app-profile-details>
-<div class="pillshell">
-    <button class="btn btn-primary" id="btnBadge" type="submit" style="margin-right: 10px;" [disabled]="badgeBtn" (click)="badgeBtnClick()" routerLink='/profile/badges' asGlass>Badges</button>
-    <button class="btn btn-primary" type="submit" [disabled]="achievementBtn" (click)="achievementBtnClick()" routerLink='/profile/achievements' asGlass>Achievements</button>
+<!--<div class="pillshell">-->
+<!--    <button class="btn btn-primary" id="btnBadge" type="submit" style="margin-right: 10px;" [disabled]="badgeBtn" (click)="badgeBtnClick()" routerLink='/profile/badges' asGlass>Badges</button>-->
+<!--    <button class="btn btn-primary" type="submit" [disabled]="achievementBtn" (click)="achievementBtnClick()" routerLink='/profile/achievements' asGlass>Achievements</button>-->
+<!--</div>-->
+<ul class="nav nav-tabs nav-fill" id="MyTab" role="tablist">
+  <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" id="badges-tab" data-bs-target="#badges" asGlass>Badges</button></li>
+  <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" id="achievements-tab" data-bs-target="#achievements" asGlass>Achievements</button></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="badges" role="tabpanel"><app-badges></app-badges></div>
+  <div class="tab-pane" id="achievements" role="tabpanel"><app-achievements></app-achievements></div>
 </div>
-<router-outlet></router-outlet>
+<script>
+  const firstTabEl = document.querySelector('#MyTab li:first-child button');
+  const firstTab = new bootstrap.Tab(firstTabEl);
+
+  firstTab.show()
+
+  const triggerTabList = [].slice.call(document.querySelectorAll('#MyTab button'));
+  triggerTabList.forEach(function (triggerEl) {
+    const tabTrigger = new bootstrap.Tab(triggerEl);
+
+    triggerEl.addEventListener('click', function (event) {
+      event.preventDefault()
+      tabTrigger.show()
+    })
+  })
+</script>
+<!--<router-outlet></router-outlet>-->

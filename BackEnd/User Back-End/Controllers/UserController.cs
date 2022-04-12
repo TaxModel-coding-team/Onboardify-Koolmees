@@ -63,7 +63,7 @@ namespace User_Back_End.Controllers
             NewUserViewModel newUserViewModel = new NewUserViewModel();
             newUserViewModel.ID = userViewModel.ID;
             HttpResponseMessage response = await client.PostAsJsonAsync(
-                "quests/assignQuests", newUserViewModel);
+                "https://localhost:5001/quests/assignQuests", newUserViewModel);
             response.EnsureSuccessStatusCode();
             // return URI of the created resource.
             return response.Headers.Location;

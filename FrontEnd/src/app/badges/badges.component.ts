@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Achievement } from '../Models/achievement';
 import { Badge } from '../Models/badge';
 
 @Component({
@@ -7,8 +6,8 @@ import { Badge } from '../Models/badge';
   templateUrl: './badges.component.html',
   styleUrls: ['./badges.component.css']
 })
-export class BadgesComponent implements OnInit {
 
+export class BadgesComponent implements OnInit {
 
   public badges: Array<Badge> = [
     { icon: 'cup', name: 'cup', seen: false },
@@ -46,7 +45,7 @@ export class BadgesComponent implements OnInit {
     { icon: 'bandaid', name: 'bandaid', seen: false },
     { icon: 'apple', name: 'apple', seen: false },
   ];
-  
+
   constructor() { }
 
   ngOnInit(): void {
