@@ -6,6 +6,9 @@
     <div class="profiledetails">
         {{user.username}}<br/>
         {{user.email}}<br/>
+        {foreach $user.userRoles as role}
+        {{role}}<br/>
+        {/foreach}
         <div class="progress">
             <div class="progress-bar" role="progressbar" style="width: 100px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
           </div>

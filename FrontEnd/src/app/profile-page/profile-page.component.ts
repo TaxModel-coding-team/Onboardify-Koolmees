@@ -31,7 +31,5 @@ export class ProfilePageComponent implements OnInit {
   public achievementBtnClick(): void {
     this.achievementBtn = true;
     this.badgeBtn = false;
-
   }
-
 }

@@ -2,12 +2,17 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { AuthenticationResult } from '@azure/msal-common';
 import { User } from '../Models/user';
+import { Role } from '../Models/Role';
 import { UserService } from '../Services/user.service';
+import { RoleServices } from '../Services/role.service';
 import { HttpClient } from '@angular/common/http';
 import { RegistrationService } from '../Services/registration.service';
 import { AppRoutingModule } from '../app-routing.module';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { timeStamp } from 'console';
+import { Observable } from 'rxjs';
+import { Quest } from '../Models/quest';
 
 @Component({
   selector: 'app-microsoft-login',
@@ -20,10 +25,12 @@ export class MicrosoftLoginComponent implements OnInit {
   //Properties
   public logincheck : boolean = false; 
   private newUser : User = {} as User;
+  private questsbyrole : Quest[] = [];
 
   constructor(
      private msalService: MsalService,
      private userService: UserService, 
+     private roleService: RoleServices,
      private registration: RegistrationService,
      private router:Router,
      private cookieService: CookieService
@@ -68,6 +75,12 @@ export class MicrosoftLoginComponent implements OnInit {
     this.userService.verifyIfUserExists(this.newUser)
     .subscribe((user) => 
     {
+      user.userRoles.forEach(role => {
+        this.roleService.getQuestByRole(role.id).subscribe(res => this.newUser.userQuestsByRole = res);
+        this.newUser.userQuestsByRole.forEach(quest => {
+          this.newUser.userQuestsByRole.push(quest);
+        });
+      });
       this.newUser = user;
       this.router.navigateByUrl('/quests');
     },
