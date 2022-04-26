@@ -49,5 +49,10 @@ namespace TestProject.Stub
         {
             throw new NotImplementedException();
         }
+
+        public User GetRolesByUser(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

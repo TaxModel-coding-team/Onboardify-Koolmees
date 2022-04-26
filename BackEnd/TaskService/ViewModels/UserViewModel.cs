@@ -8,5 +8,6 @@ namespace back_end.ViewModels
     public class UserViewModel
     {
         public Guid ID { get; set; }
+        public List<RoleViewModel> roles { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace User_Back_End.Logic
 
         public UserViewModel NewUser(UserViewModel userViewModel)
         {   
-            userViewModel.ExperiencePoints = 0;
+           // userViewModel.ExperiencePoints = 0;
             var user = _mapper.Map<User>(userViewModel);
             userViewModel =  _mapper.Map<UserViewModel>(_repository.NewUser(user));
             // userViewModel.qrCode = CreateQRCode(userViewModel);
@@ -50,6 +50,12 @@ namespace User_Back_End.Logic
             List<User> users = _repository.GetByRole(id).ToList();
             List<UserViewModel> userViewModels = _mapper.Map<List<UserViewModel>>(users);
             return userViewModels;
+        }
+
+        public UserViewModel GetRolesByUserID(Guid id)
+        {
+            UserViewModel userViewModel = _mapper.Map<UserViewModel>(_repository.GetRolesByUser(id));
+            return userViewModel;
         }
     }
 }

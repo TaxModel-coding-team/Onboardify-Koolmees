@@ -31,7 +31,7 @@ namespace back_end.DAL
         public ICollection<Quest> GetQuestsByRole(Guid guid)
         {
             List<Quest> quests = new List<Quest>();
-            quests.Add(_context.Quest.FirstOrDefault(q => q.Role.Any(r => r.Id == guid)));
+            quests.Add(_context.Quest.FirstOrDefault(q => q.RoleId == guid));
             return quests;
         }
 

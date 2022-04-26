@@ -39,6 +39,7 @@ namespace back_end.Logic
         {
             List<QuestUserManagement> questsUsers = _repository.GetSubQuestsByUser(guid).ToList();
 
+
             foreach (QuestUserManagement quest in questsUsers)
             {
                 quest.SubQuests.Completed = quest.Completed;
