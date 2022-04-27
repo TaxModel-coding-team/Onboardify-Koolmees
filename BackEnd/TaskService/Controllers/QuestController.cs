@@ -38,9 +38,10 @@ namespace back_end.Controllers
 
         [HttpGet]
         [Route("{ID}")]
-        public IActionResult GetQuestsByUser(Guid ID)
+        public async Task<ActionResult> GetQuestsByUserAsync(Guid ID)
         {
             var quests = _questlogic.GetQuestsByUser(ID);
+            await GetUserRoles(ID);
             return Ok(quests);
         }
 
@@ -83,15 +84,19 @@ namespace back_end.Controllers
                 questCompletionViewModels.Add(questCompletionViewModel);
             }
         }
+        
 
-        static async Task<Uri> GetUserRoles(Guid userID)
+        static async Task<Uri> GetUserRoles(Guid ID)
         {
-            UserViewModel userViewModel = new UserViewModel();
-            userViewModel.ID = userID;
-            HttpResponseMessage response = await client.GetAsync(
-                "https://localhost:5005/GetRoles/{userID}");
-           // userViewModel = response;
-            response.EnsureSuccessStatusCode();
+            List<UserRoleViewModel> userRoleViewModels = new List<UserRoleViewModel>();
+            string requestURI = "https://localhost:5005/users/getRoles/" + ID.ToString();
+
+            HttpResponseMessage response = client.GetAsync(requestURI).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                userRoleViewModels = response.Content.ReadAsAsync<List<UserRoleViewModel>>().Result;
+            }
+               // response.EnsureSuccessStatusCode();
             // return URI of the created resource.
             return response.Headers.Location;
         }

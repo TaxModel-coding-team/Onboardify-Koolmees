@@ -81,8 +81,8 @@ namespace User_Back_End.Controllers
         public IActionResult GetRolesByUser(Guid userID)
         {
             UserViewModel userVM = _userLogic.GetRolesByUserID(userID);
-            ICollection<UserRoleViewModel> roles = userVM.Roles;
-            return Ok(roles);
+           // ICollection<UserRoleViewModel> roles = userVM.Roles;
+            return Ok(userVM.Roles);
         }
 
     }

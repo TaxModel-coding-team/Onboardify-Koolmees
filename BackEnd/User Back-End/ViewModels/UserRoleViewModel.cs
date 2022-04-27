@@ -10,6 +10,6 @@ namespace User_Back_End.ViewModels
         public Guid UserID { get; set; }
         public Guid RoleID { get; set; }
        // public virtual UserViewModel user { get; set; }
-        public virtual RoleViewModel role { get; set; }
+       // public virtual RoleViewModel role { get; set; }
     }
 }
