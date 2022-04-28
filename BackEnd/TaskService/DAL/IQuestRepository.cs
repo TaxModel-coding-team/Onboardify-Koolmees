@@ -17,5 +17,6 @@ namespace back_end.DAL
         bool CompleteQuest(QuestUserManagement questToComplete);
 
         void NewUserQuests(List<QuestUserManagement> questUserManagement);
+        List<Quest> GetFullQuestsByRoles(List<Role> roles);
     }
 }

@@ -42,13 +42,38 @@ namespace back_end.Logic
 
             foreach (QuestUserManagement quest in questsUsers)
             {
-                quest.SubQuests.Completed = quest.Completed;
+                quest.SubQuest.Completed = quest.Completed;
             }
 
-            List<Quest> quests = _repository.GetQuestBySubQuest(questsUsers.Select(q => q.SubQuests).ToList()).ToList();
+            List<Quest> quests = _repository.GetQuestBySubQuest(questsUsers.Select(q => q.SubQuest).ToList()).ToList();
             List<QuestViewModel> questViewModels = _mapper.Map<List<QuestViewModel>>(quests);
 
             return questViewModels;
+        }
+
+        public List<QuestViewModel> GetUserQuests(UserViewModel userViewModel)
+        {
+            List<QuestUserManagement> questUserManagements = _repository.GetSubQuestsByUser(userViewModel.ID).ToList();
+            List<QuestViewModel> quests = _mapper.Map<List<QuestViewModel>>(_repository.GetFullQuestsByRoles(_mapper.Map<List<Role>>(userViewModel.roles)));
+
+            //foreach (QuestUserManagement subQuest in questUserManagements)
+            //{
+            //    subQuest.SubQuest.Completed = subQuest.Completed;
+            //}
+
+            foreach (QuestViewModel quest in quests)
+            {
+                
+                foreach (SubQuestViewModel subQuestViewModel in quest.SubQuests)
+                {
+                    if (questUserManagements.Any(q => q.SubQuestID == subQuestViewModel.ID && q.Completed == true))
+                    {
+                        subQuestViewModel.Completed = true;
+                    }
+                    //if (subQuestViewModel.ID == questUserManagements.)
+                }              
+            }
+            return quests;
         }
 
         public List<QuestViewModel> GetQuestsByRole(Guid guid)

@@ -82,7 +82,7 @@ namespace User_Back_End.Controllers
         {
             UserViewModel userVM = _userLogic.GetRolesByUserID(userID);
            // ICollection<UserRoleViewModel> roles = userVM.Roles;
-            return Ok(userVM.Roles);
+            return Ok(userVM);
         }
 
     }

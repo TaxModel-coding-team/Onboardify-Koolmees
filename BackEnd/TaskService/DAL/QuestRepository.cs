@@ -6,7 +6,6 @@ using back_end.Models;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using back_end.Logic;
-using back_end.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace back_end.DAL
@@ -45,7 +44,7 @@ namespace back_end.DAL
         {
             List<QuestUserManagement> questUserManagement = new List<QuestUserManagement>();
 
-            questUserManagement = _context.QuestUserManagement.Where(u => u.UserID == guid).Include(q => q.SubQuests)
+            questUserManagement = _context.QuestUserManagement.Where(u => u.UserID == guid).Include(q => q.SubQuest)
                 .ToList();
 
             return questUserManagement;
@@ -76,6 +75,18 @@ namespace back_end.DAL
             }
 
             return false;
+        }
+
+        public List<Quest> GetFullQuestsByRoles(List<Role> roles)
+        {
+            var ids = new List<Guid>();
+            foreach (var role in roles)
+            {
+                ids.Add(role.RoleID);
+            }
+            List<Quest> quests = new List<Quest>();
+            quests = _context.Quest.Where(q => ids.Contains(q.RoleId)).ToList();
+            return quests;
         }
     }
 }
