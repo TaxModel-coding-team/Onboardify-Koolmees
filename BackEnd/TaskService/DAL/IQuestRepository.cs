@@ -11,9 +11,9 @@ namespace back_end.DAL
     public interface IQuestRepository
     {
         ICollection<QuestUserManagement> GetSubQuestsByUser(Guid guid);
-        ICollection<Quest> GetQuestBySubQuest(List<SubQuest> subQuests);
+       // ICollection<Quest> GetQuestBySubQuest(List<SubQuest> subQuests);
         ICollection<Quest> GetAllQuests();
-        ICollection<Quest> GetQuestsByRole(Guid guid);
+       // ICollection<Quest> GetQuestsByRole(Guid guid);
         bool CompleteQuest(QuestUserManagement questToComplete);
 
         void NewUserQuests(List<QuestUserManagement> questUserManagement);

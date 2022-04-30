@@ -67,13 +67,13 @@ namespace back_end.Controllers
             return Ok(quests);
         }
 
-        [HttpGet]
-        [Route("role/{ID}")]
-        public IActionResult GetQuestsByRole(Guid ID)
-        {
-            var quests = _questlogic.GetQuestsByRole(ID);
-            return Ok(quests);
-        }
+        //[HttpGet]
+        //[Route("role/{ID}")]
+        //public IActionResult GetQuestsByRole(Guid ID)
+        //{
+        //    var quests = _questlogic.GetQuestsByRole(ID);
+        //    return Ok(quests);
+        //}
 
         private void AssignQuestForUser(UserViewModel userViewModel, List<QuestCompletionViewModel> questCompletionViewModels, QuestViewModel quest)
         {
