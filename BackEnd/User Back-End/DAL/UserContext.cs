@@ -38,8 +38,6 @@ namespace User_Back_End.DAL
                 .HasForeignKey(ur => ur.RoleID)
                 .IsRequired();
             });
-            //modelBuilder.Entity<UserRole>().HasOne(ur => ur.user).WithMany(u => u.Roles).HasForeignKey(ur => ur.UserID);
-            //modelBuilder.Entity<UserRole>().HasOne(ur => ur.role).WithMany(r => r.UserRoles).HasForeignKey(ur => ur.RoleID);
         }
     }
 }

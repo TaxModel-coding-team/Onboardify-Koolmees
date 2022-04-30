@@ -56,11 +56,6 @@ namespace back_end.Logic
             List<QuestUserManagement> questUserManagements = _repository.GetSubQuestsByUser(userViewModel.ID).ToList();
             List<QuestViewModel> quests = _mapper.Map<List<QuestViewModel>>(_repository.GetFullQuestsByRoles(_mapper.Map<List<Role>>(userViewModel.roles)));
 
-            //foreach (QuestUserManagement subQuest in questUserManagements)
-            //{
-            //    subQuest.SubQuest.Completed = subQuest.Completed;
-            //}
-
             foreach (QuestViewModel quest in quests)
             {
                 
@@ -70,7 +65,6 @@ namespace back_end.Logic
                     {
                         subQuestViewModel.Completed = true;
                     }
-                    //if (subQuestViewModel.ID == questUserManagements.)
                 }              
             }
             return quests;

@@ -36,7 +36,6 @@ namespace User_Back_End.DAL
 
         public User GetRolesByUser(Guid id)
         {
-           // User user = new User();
             User user = _context.User.Where(u => u.ID == id).Include(u => u.Roles).ThenInclude(r => r.role).SingleOrDefault();
             return user;
         }

@@ -40,9 +40,7 @@ namespace back_end.Controllers
         [Route("{userID}")]
         public async Task<ActionResult> GetQuestsByUserAsync(Guid userID)
         {
-           // var quests = _questlogic.GetQuestsByUser(ID);
             UserViewModel userViewModel =  await GetUserRoles(userID);
-
             List<QuestViewModel> quests = _questlogic.GetUserQuests(userViewModel);
 
             return Ok(quests);
@@ -99,8 +97,7 @@ namespace back_end.Controllers
             {
                 userViewModel = response.Content.ReadAsAsync<UserViewModel>().Result;
             }
-               // response.EnsureSuccessStatusCode();
-            // return URI of the created resource.
+               // Add Error handling
             return userViewModel;
         }
     }

@@ -79,7 +79,7 @@ namespace back_end.DAL
 
         public List<Quest> GetFullQuestsByRoles(List<Role> roles)
         {
-            var ids = new List<Guid>();
+            List<Guid> ids = new List<Guid>();
             foreach (var role in roles)
             {
                 ids.Add(role.RoleID);
