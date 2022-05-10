@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using User_Back_End.DAL;
 
 namespace User_Back_End.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20220426094010_getUserRoles")]
+    partial class getUserRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,7 +31,12 @@ namespace User_Back_End.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("UserID")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Role");
                 });
@@ -67,16 +74,23 @@ namespace User_Back_End.Migrations
                     b.ToTable("UserRole");
                 });
 
+            modelBuilder.Entity("User_Back_End.Models.Role", b =>
+                {
+                    b.HasOne("User_Back_End.Models.User", null)
+                        .WithMany("Roles")
+                        .HasForeignKey("UserID");
+                });
+
             modelBuilder.Entity("User_Back_End.Models.UserRole", b =>
                 {
                     b.HasOne("User_Back_End.Models.Role", "role")
-                        .WithMany("UserRoles")
+                        .WithMany()
                         .HasForeignKey("RoleID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("User_Back_End.Models.User", "user")
-                        .WithMany("Roles")
+                        .WithMany()
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -84,11 +98,6 @@ namespace User_Back_End.Migrations
                     b.Navigation("role");
 
                     b.Navigation("user");
-                });
-
-            modelBuilder.Entity("User_Back_End.Models.Role", b =>
-                {
-                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("User_Back_End.Models.User", b =>

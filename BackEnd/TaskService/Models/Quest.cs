@@ -16,7 +16,7 @@ namespace back_end.Models
         public string Description { get; set; }
         public virtual ICollection<SubQuest> SubQuests { get; set; }
         
-        public List<RoleViewModel> Role { get; set; }
+        public Guid RoleId { get; set; }
 
         public Quest(Guid iD, string title, string description)
         {

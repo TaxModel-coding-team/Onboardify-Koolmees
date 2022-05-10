@@ -13,8 +13,6 @@ namespace User_Back_End.ViewModels
         public Guid ID { get; set; }
         public string Email { get; set; }
         public string Username { get; set; }
-        public int ExperiencePoints { get; set; }
-        // public MediaTypeNames.Image qrCode { get; set; }
-        public List<RoleViewModel> Roles { get; set; }
+        public ICollection<UserRoleViewModel> Roles { get; set; }
     }
 }

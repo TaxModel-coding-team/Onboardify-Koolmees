@@ -24,6 +24,20 @@ namespace User_Back_End.DAL
             modelBuilder.Entity<User>().Property(User => User.ID).HasDefaultValueSql("NEWID()");
             modelBuilder.Entity<Role>().Property(Role => Role.Id).HasDefaultValueSql("NEWID()");
             modelBuilder.Entity<UserRole>().HasKey(ur => new { ur.UserID, ur.RoleID });
+            modelBuilder.Entity<User>(b =>
+            {
+                b.HasMany(e => e.Roles)
+                .WithOne(e => e.user)
+                .HasForeignKey(ur => ur.UserID)
+                .IsRequired();
+            });
+            modelBuilder.Entity<Role>(b =>
+            {
+                b.HasMany(e => e.UserRoles)
+                .WithOne(e => e.role)
+                .HasForeignKey(ur => ur.RoleID)
+                .IsRequired();
+            });
         }
     }
 }

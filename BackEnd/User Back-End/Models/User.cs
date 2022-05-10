@@ -12,14 +12,14 @@ namespace User_Back_End.Models
         [Key] [Required] public Guid ID { get; set; }
         public string Email { get; set; }
         public string Username { get; set; }
-        [NotMapped]
-        public List<Role> Roles { get; set; }
+        
+        public virtual ICollection<UserRole> Roles { get; set; }
 
         public User()
         {
         }
 
-        public User(Guid id, string email, string username, List<Role> roles)
+        public User(Guid id, string email, string username, ICollection<UserRole> roles)
         {
             ID = id;
             Email = email;

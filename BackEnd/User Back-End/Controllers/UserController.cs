@@ -76,6 +76,13 @@ namespace User_Back_End.Controllers
             var users = _userLogic.GetUsersByRole(id);
             return Ok(users);
         }
+        [HttpGet]
+        [Route("getRoles/{userID}")]
+        public IActionResult GetRolesByUser(Guid userID)
+        {
+            UserViewModel userVM = _userLogic.GetRolesByUserID(userID);
+            return Ok(userVM);
+        }
 
     }
 }

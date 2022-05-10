@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace User_Back_End.Logic
+namespace back_end.Models
 {
-    public class RoleLogic
+    public class Role
     {
+        public Guid RoleID { get; set; }
     }
 }

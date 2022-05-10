@@ -12,7 +12,7 @@ namespace back_end.Models
         public Guid ID { get; set; }
         public Guid UserID { get; set; }
         public Guid SubQuestID { get; set; }
-        public virtual SubQuest SubQuests {get; set; }
+        public virtual SubQuest SubQuest {get; set; }
         public bool Completed { get; set; }
     }
 }
