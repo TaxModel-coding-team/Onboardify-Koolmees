@@ -27,13 +27,6 @@ namespace back_end.DAL
             return quests;
         }
 
-        //public ICollection<Quest> GetQuestsByRole(Guid guid)
-        //{
-        //    List<Quest> quests = new List<Quest>();
-        //    quests.Add(_context.Quest.FirstOrDefault(q => q.RoleId == guid));
-        //    return quests;
-        //}
-
         public void NewUserQuests(List<QuestUserManagement> questUserManagement)
         {
             _context.QuestUserManagement.AddRange(questUserManagement);
@@ -49,18 +42,6 @@ namespace back_end.DAL
 
             return questUserManagement;
         }
-
-        //public ICollection<Quest> GetQuestBySubQuest(List<SubQuest> subQuests)
-        //{
-        //    List<Quest> quests = new List<Quest>();
-
-        //    foreach (SubQuest subQuest in subQuests)
-        //    {
-        //        quests.Add(_context.Quest.Where(q => q.SubQuests.Any(sq => sq.ID == subQuest.ID)).FirstOrDefault());
-        //    }
-
-        //    return quests.Distinct().ToList();
-        //}
 
         public bool CompleteQuest(QuestUserManagement questToComplete)
         {

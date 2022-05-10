@@ -4,21 +4,24 @@
 
 <div class="accordion list-group" id="accordionExample">
   <div *ngFor="let quest of quests" class="accordion-item" style="background-color: transparent; border: 0;">
-    <div class="accordion-header" attr.id="heading{{quest.title}}" asGlass [borderRadius]=9>
+    <div class="accordion-header" attr.id="heading{{quest.id}}" asGlass [borderRadius]=9>
       <button
         class="accordion-button collapsed text-white"
         type="button"
         style="background-color: transparent;"
         data-bs-toggle="collapse"
-        [attr.data-bs-target]="'#collapse' + quest.title"
+        [attr.data-bs-target]="'#collapse' + quest.id"
         aria-expanded="true"
-        attr.aria-controls="collapse{{quest.title}}">
+        attr.aria-controls="collapse{{quest.id}}">
+        {{quest.title}}
+        <br>
+        <br>
         {{quest.description}}
       </button>
     </div>
 
-    <div attr.id="collapse{{quest.title}}" class="accordion-collapse collapse"
-         attr.aria-labelledby="heading{{quest.title}}" data-bs-parent="#accordionExample" asGlass [borderRadius]=9>
+    <div attr.id="collapse{{quest.id}}" class="accordion-collapse collapse"
+         attr.aria-labelledby="heading{{quest.id}}" data-bs-parent="#accordionExample" asGlass [borderRadius]=9>
       <div class="accordion-body">
         <ul *ngFor="let subquest of quest.subQuests" style="padding-left: 0px;">
           <li style="text-align: left;">

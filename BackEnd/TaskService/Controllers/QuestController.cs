@@ -67,14 +67,6 @@ namespace back_end.Controllers
             return Ok(quests);
         }
 
-        //[HttpGet]
-        //[Route("role/{ID}")]
-        //public IActionResult GetQuestsByRole(Guid ID)
-        //{
-        //    var quests = _questlogic.GetQuestsByRole(ID);
-        //    return Ok(quests);
-        //}
-
         private void AssignQuestForUser(UserViewModel userViewModel, List<QuestCompletionViewModel> questCompletionViewModels, QuestViewModel quest)
         {
             foreach (SubQuestViewModel subQuestViewModel in quest.SubQuests)
@@ -84,8 +76,7 @@ namespace back_end.Controllers
                 questCompletionViewModel.SubQuestID = subQuestViewModel.ID;
                 questCompletionViewModels.Add(questCompletionViewModel);
             }
-        }
-        
+        }       
 
         static async Task<UserViewModel> GetUserRoles(Guid ID)
         {
