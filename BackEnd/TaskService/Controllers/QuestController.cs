@@ -77,7 +77,7 @@ namespace back_end.Controllers
                 questCompletionViewModels.Add(questCompletionViewModel);
             }
         }       
-
+        //must be changed in order to work within SOLID principles
         static async Task<UserViewModel> GetUserRoles(Guid ID)
         {
             List<UserRoleViewModel> userRoleViewModels = new List<UserRoleViewModel>();
