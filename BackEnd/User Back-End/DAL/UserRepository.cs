@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,6 +24,19 @@ namespace User_Back_End.DAL
         {
             _context.User.Add(user);
             _context.SaveChanges();
+            return user;
+        }
+
+        public ICollection<User> GetByRole(Guid id)
+        {
+            List<User> users = new List<User>();
+            users.Add(_context.User.FirstOrDefault(u => u.Roles.Any(r => r.RoleID == id)));
+            return users;
+        }
+
+        public User GetRolesByUser(Guid id)
+        {
+            User user = _context.User.Where(u => u.ID == id).Include(u => u.Roles).ThenInclude(r => r.role).SingleOrDefault();
             return user;
         }
     }

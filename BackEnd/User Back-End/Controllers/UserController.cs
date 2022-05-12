@@ -63,10 +63,25 @@ namespace User_Back_End.Controllers
             NewUserViewModel newUserViewModel = new NewUserViewModel();
             newUserViewModel.ID = userViewModel.ID;
             HttpResponseMessage response = await client.PostAsJsonAsync(
-                "quests/assignQuests", newUserViewModel);
+                "https://localhost:5001/quests/assignQuests", newUserViewModel);
             response.EnsureSuccessStatusCode();
             // return URI of the created resource.
             return response.Headers.Location;
+        }
+
+        [HttpGet]
+        [Route("byRole/{Id}")]
+        public IActionResult GetUsersByRole(Guid id)
+        {
+            var users = _userLogic.GetUsersByRole(id);
+            return Ok(users);
+        }
+        [HttpGet]
+        [Route("getRoles/{userID}")]
+        public IActionResult GetRolesByUser(Guid userID)
+        {
+            UserViewModel userVM = _userLogic.GetRolesByUserID(userID);
+            return Ok(userVM);
         }
 
     }

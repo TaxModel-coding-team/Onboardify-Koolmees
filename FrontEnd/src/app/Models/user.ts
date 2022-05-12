@@ -1,7 +1,13 @@
-export interface User{
-    id: number;
-    email: string;
-    username: string;
-    experiencepoints: number;
-    qrcode: any;
-  }
+import {Quest} from "./quest";
+import {Role} from "./Role";
+
+export interface User {
+  user: Promise<boolean>;
+  id: number;
+  email: string;
+  username: string;
+  experiencepoints: number;
+  qrcode: any;
+  roles: Role[];
+  userQuestsByRole: Quest[];
+}

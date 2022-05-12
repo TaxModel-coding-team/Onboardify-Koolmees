@@ -4,9 +4,9 @@
 
 export const environment = {
   production: true,
-  API_URL: 'https://localhost:44329',
-  USER_API_URL: 'https://localhost:44335',
-  ACHIEVEMENT_API_URL: 'https://localhost:44320'
+  API_URL: 'https://localhost:5001',
+  USER_API_URL: 'https://localhost:5005',
+  ACHIEVEMENT_API_URL: 'https://localhost:5003'
 };
 
 /*

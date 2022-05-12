@@ -6,6 +6,7 @@ using AutoMapper;
 using back_end.DAL;
 using back_end.Models;
 using back_end.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace back_end.Logic
 {
@@ -34,19 +35,23 @@ namespace back_end.Logic
             return questViewModels;
         }
 
-        public List<QuestViewModel> GetQuestsByUser(Guid guid)
+        public List<QuestViewModel> GetUserQuests(UserViewModel userViewModel)
         {
-            List<QuestUserManagement> questsUsers = _repository.GetSubQuestsByUser(guid).ToList();
+            List<QuestUserManagement> questUserManagements = _repository.GetSubQuestsByUser(userViewModel.ID).ToList();
+            List<QuestViewModel> quests = _mapper.Map<List<QuestViewModel>>(_repository.GetFullQuestsByRoles(_mapper.Map<List<Role>>(userViewModel.roles)));
 
-            foreach (QuestUserManagement quest in questsUsers)
+            foreach (QuestViewModel quest in quests)
             {
-                quest.SubQuests.Completed = quest.Completed;
+                
+                foreach (SubQuestViewModel subQuestViewModel in quest.SubQuests)
+                {
+                    if (questUserManagements.Any(q => q.SubQuestID == subQuestViewModel.ID && q.Completed == true))
+                    {
+                        subQuestViewModel.Completed = true;
+                    }
+                }              
             }
-
-            List<Quest> quests = _repository.GetQuestBySubQuest(questsUsers.Select(q => q.SubQuests).ToList()).ToList();
-            List<QuestViewModel> questViewModels = _mapper.Map<List<QuestViewModel>>(quests);
-
-            return questViewModels;
+            return quests;
         }
 
         public bool CompleteQuest(QuestCompletionViewModel questToComplete)

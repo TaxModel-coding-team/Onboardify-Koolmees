@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfilePageComponent, children: [
     { path: '', component: BadgesComponent, pathMatch: 'full'},
     { path: 'badges', component: BadgesComponent},
-    { path: 'achievements', component: AchievementsComponent} ]
+    { path: 'achievements', component: AchievementsComponent}
+    ]
   }
 ];
 

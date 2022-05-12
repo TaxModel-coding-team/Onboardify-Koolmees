@@ -7,5 +7,5 @@ export interface Quest {
     description: string;
     exp: number;
     subQuests: Subquest[];
-    
+    questRole: string;
   }

@@ -8,6 +8,8 @@ using back_end.ViewModels;
 using back_end.DAL;
 using back_end.Logic;
 using AutoMapper;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 
 namespace back_end.Controllers
@@ -16,20 +18,32 @@ namespace back_end.Controllers
     [ApiController]
     public class QuestController : ControllerBase
     {
+        
 
         private readonly QuestLogic _questlogic;
+        static HttpClient client = new HttpClient();
 
+        static async Task RunAsync()
+        {
+            client.BaseAddress = new Uri("https://localhost:44329/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+        }
         public QuestController(QuestLogic questlogic)
         {
             _questlogic = questlogic;
+            RunAsync();
         }
 
 
         [HttpGet]
-        [Route("{ID}")]
-        public IActionResult GetQuestsByUser(Guid ID)
+        [Route("{userID}")]
+        public async Task<ActionResult> GetQuestsByUserAsync(Guid userID)
         {
-            var quests = _questlogic.GetQuestsByUser(ID);
+            UserViewModel userViewModel =  await GetUserRoles(userID);
+            List<QuestViewModel> quests = _questlogic.GetUserQuests(userViewModel);
+
             return Ok(quests);
         }
 
@@ -63,6 +77,20 @@ namespace back_end.Controllers
                 questCompletionViewModel.SubQuestID = subQuestViewModel.ID;
                 questCompletionViewModels.Add(questCompletionViewModel);
             }
+        }       
+        //must be changed in order to work within SOLID principles 
+        static async Task<UserViewModel> GetUserRoles(Guid ID)
+        {
+            List<UserRoleViewModel> userRoleViewModels = new List<UserRoleViewModel>();
+            string requestURI = "https://localhost:5005/users/getRoles/" + ID.ToString();
+            UserViewModel userViewModel = new UserViewModel();
+            HttpResponseMessage response = client.GetAsync(requestURI).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                userViewModel = response.Content.ReadAsAsync<UserViewModel>().Result;
+            }
+               // Add Error handling
+            return userViewModel;
         }
     }
 }
