@@ -30,7 +30,7 @@ jobs:
         dotnet sonarscanner begin
         /d:sonar.host.url="https://sonarcloud.io"
         /o:"taxmodel-coding-team"
-        /k:"Onboardify-Koolmees"
+        /k:"TaxModel-coding-team_Onboardify-Koolmees"
         /d:sonar.login=${{ env.SONAR_TOKEN }}
         /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
 
