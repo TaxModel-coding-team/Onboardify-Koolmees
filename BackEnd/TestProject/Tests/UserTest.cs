@@ -13,6 +13,7 @@ namespace TestProject.Tests
     public class UserTest
     {
         private static UserStub stub = new UserStub();
+        
 
         [TestMethod]
         public void NewUser()
