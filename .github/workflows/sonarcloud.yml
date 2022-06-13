@@ -35,10 +35,10 @@ jobs:
         /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
 
     - name: 'Restore packages'
-      run: dotnet restore
+      run: dotnet restore BackEnd/
 
     - name: 'Build project'
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore Backend/
 
     - name: 'End Sonar scan'
       run: dotnet sonarscanner end /d:sonar.login=${{ env.SONAR_TOKEN }}
