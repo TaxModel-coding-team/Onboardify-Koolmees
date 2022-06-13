@@ -1,49 +1,44 @@
-name: Build
+name: SonarCloud Analysis
+
 on:
   push:
-    branches:
-      - master, main, Development,
+    branches: [main, Development]
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [main, Development]
+
+env:
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
-  build:
-    name: Build
-    runs-on: windows-latest
+  analyse:
+    runs-on: ubuntu-latest
     steps:
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.11
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v1
-        with:
-          path: ~\sonar\cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-      - name: Cache SonarCloud scanner
-        id: cache-sonar-scanner
-        uses: actions/cache@v1
-        with:
-          path: .\.sonar\scanner
-          key: ${{ runner.os }}-sonar-scanner
-          restore-keys: ${{ runner.os }}-sonar-scanner
-      - name: Install SonarCloud scanner
-        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        shell: powershell
-        run: |
-          New-Item -Path .\.sonar\scanner -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-      - name: Build and analyze
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          PROJECT_PATH: 'BackEnd/TaskService/back-end.csproj'
-        shell: powershell
-        run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"TaxModel-coding-team_Onboardify-Koolmees" /o:"taxmodel-coding-team" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-           dotnet restore ${{ env.PROJECT_PATH }}
-          dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+    - name: 'Checkout'
+      uses: actions/checkout@v2
+
+    - name: 'Install dotnet'
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: 'Install Sonar global tool'
+      run: dotnet tool install --global dotnet-sonarscanner
+
+    - name: 'Begin Sonar scan'
+      run: >
+        dotnet sonarscanner begin
+        /d:sonar.host.url="https://sonarcloud.io"
+        /o:"TaxModel Coding Team"
+        /k:"Onboardify-Koolmees"
+        /d:sonar.login=${{ env.SONAR_TOKEN }}
+        /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
+
+    - name: 'Restore packages'
+      run: dotnet restore
+
+    - name: 'Build project'
+      run: dotnet build --no-restore
+
+    - name: 'End Sonar scan'
+      run: dotnet sonarscanner end /d:sonar.login=${{ env.SONAR_TOKEN }}
