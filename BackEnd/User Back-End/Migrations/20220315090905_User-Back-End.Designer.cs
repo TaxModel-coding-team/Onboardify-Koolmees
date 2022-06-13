@@ -13,7 +13,7 @@ namespace User_Back_End.Migrations
     [Migration("20220315090905_User-Back-End")]
     partial class UserBackEnd
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

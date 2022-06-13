@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {MsalService} from '@azure/msal-angular';
 import {AuthenticationResult} from '@azure/msal-common';
 import {User} from '../Models/user';
-import {Role} from '../Models/Role';
+import {Role} from '../Models/role';
 import {UserService} from '../Services/user.service';
 import {RoleServices} from '../Services/role.service';
 import {HttpClient} from '@angular/common/http';

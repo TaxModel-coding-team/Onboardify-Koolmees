@@ -1,5 +1,5 @@
 import {Quest} from "./quest";
-import {Role} from "./Role";
+import {Role} from "./role";
 
 export interface User {
   user: Promise<boolean>;
