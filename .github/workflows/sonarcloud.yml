@@ -29,7 +29,7 @@ jobs:
       run: >
         dotnet sonarscanner begin
         /d:sonar.host.url="https://sonarcloud.io"
-        /o:"TaxModel-Coding-Team"
+        /o:"taxmodel-coding-team"
         /k:"Onboardify-Koolmees"
         /d:sonar.login=${{ env.SONAR_TOKEN }}
         /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
