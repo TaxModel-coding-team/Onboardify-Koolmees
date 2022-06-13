@@ -2,9 +2,9 @@ name: SonarCloud Analysis
 
 on:
   push:
-    branches: [main, Development]
+    branches: [master]
   pull_request:
-    branches: [main, Development]
+    branches: [master]
 
 env:
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
