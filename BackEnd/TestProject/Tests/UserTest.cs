@@ -45,5 +45,16 @@ namespace TestProject.Tests
             User testResult = stub.GetUser(expected);
             Assert.AreNotEqual(expected, testResult);
         }
+        
+        [TestMethod]
+        public void DeleteFalseUser()
+        {
+            User temp = new User(new Guid("8A39236A-FBB0-4AC6-804D-559B8B2B1D64"), "362569@student.fontys.nl");
+            User tempAddTestResult = stub.NewUser(temp);
+            User expected = new User(null, null, null);
+            User tempDeleteTestResult = stub.DeleteUser(temp);
+            User testResult = stub.GetUser(temp);
+            Assert.AreEqual(expected, testResult);
+        }
     }
 }
